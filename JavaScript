@@ -1,0 +1,35 @@
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.querySelector("form");
+
+    form.addEventListener("submit", function (event) {
+        event.preventDefault(); // Prevent actual form submission
+
+        const firstName = document.querySelector("input[placeholder='First Name']").value.trim();
+        const lastName = document.querySelector("input[placeholder='Last Name']").value.trim();
+        const email = document.querySelector("input[type='email']").value.trim();
+        const password = document.querySelector("input[type='password']").value.trim();
+
+        if (!firstName || !lastName) {
+            alert("Please enter both first and last name.");
+            return;
+        }
+
+        if (!validateEmail(email)) {
+            alert("Please enter a valid email address.");
+            return;
+        }
+
+        if (password.length < 6) {
+            alert("Password must be at least 6 characters long.");
+            return;
+        }
+
+        alert("Account successfully created!");
+        form.submit(); // Simulate form submission (you can integrate it with backend later)
+    });
+
+    function validateEmail(email) {
+        const re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        return re.test(email);
+    }
+});
